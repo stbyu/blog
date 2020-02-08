@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Stbyu&#39;s blog</title>
+  
+  <subtitle>Life,interesting!</subtitle>
+  <link href="/blog/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/blog/"/>
+  <updated>2019-08-19T12:10:08.813Z</updated>
+  <id>http://yoursite.com/blog/</id>
+  
+  <author>
+    <name>Stbyu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python——正则表达式(中)</title>
+    <link href="http://yoursite.com/blog/2019/08/19/python-re%EF%BC%882%EF%BC%89/"/>
+    <id>http://yoursite.com/blog/2019/08/19/python-re%EF%BC%882%EF%BC%89/</id>
+    <published>2019-08-19T01:07:00.000Z</published>
+    <updated>2019-08-19T12:10:08.813Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正则表达式（中）&quot;&gt;&lt;a href=&quot;#正则表达式（中）&quot; class=&quot;headerlink&quot; title=&quot;正则表达式（中）&quot;&gt;&lt;/a&gt;正则表达式（中）&lt;/h1&gt;&lt;h2 id=&quot;re库的基本使用&quot;&gt;&lt;a href=&quot;#re库的基本使用&quot; class=&quot;headerlink&quot; title=&quot;re库的基本使用&quot;&gt;&lt;/a&gt;re库的基本使用&lt;/h2&gt;&lt;p&gt;re库是python的标准库，不需要进行额外的安装，主要用于字符串匹配。调用方法也特别简单，只需要&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; re&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/"/>
+    
+      <category term="正则表达式" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/tags/Python/"/>
+    
+      <category term="正则表达式" scheme="http://yoursite.com/blog/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python——正则表达式(上)</title>
+    <link href="http://yoursite.com/blog/2019/08/18/python-re/"/>
+    <id>http://yoursite.com/blog/2019/08/18/python-re/</id>
+    <published>2019-08-18T07:25:00.000Z</published>
+    <updated>2019-08-18T08:00:27.187Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正则表达式（上）&quot;&gt;&lt;a href=&quot;#正则表达式（上）&quot; class=&quot;headerlink&quot; title=&quot;正则表达式（上）&quot;&gt;&lt;/a&gt;正则表达式（上）&lt;/h1&gt;&lt;h2 id=&quot;零-什么是正则表达式&quot;&gt;&lt;a href=&quot;#零-什么是正则表达式&quot; class=&quot;headerlink&quot; title=&quot;零 什么是正则表达式&quot;&gt;&lt;/a&gt;零 什么是正则表达式&lt;/h2&gt;&lt;p&gt;正则表达式（&lt;strong&gt;r&lt;/strong&gt;egular &lt;strong&gt;e&lt;/strong&gt;xpression，简称&lt;strong&gt;RE&lt;/strong&gt;），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/"/>
+    
+      <category term="正则表达式" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/tags/Python/"/>
+    
+      <category term="正则表达式" scheme="http://yoursite.com/blog/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python爬虫——requests库入门（上）</title>
+    <link href="http://yoursite.com/blog/2019/08/17/pypc1/"/>
+    <id>http://yoursite.com/blog/2019/08/17/pypc1/</id>
+    <published>2019-08-16T16:00:00.000Z</published>
+    <updated>2019-08-18T01:56:41.004Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;requests库入门（上）&quot;&gt;&lt;a href=&quot;#requests库入门（上）&quot; class=&quot;headerlink&quot; title=&quot;requests库入门（上）&quot;&gt;&lt;/a&gt;requests库入门（上）&lt;/h1&gt;&lt;h2 id=&quot;零-前言&quot;&gt;&lt;a href=&quot;#零-前言&quot; class=&quot;headerlink&quot; title=&quot;零 前言&quot;&gt;&lt;/a&gt;零 前言&lt;/h2&gt;&lt;p&gt;本系列是pytho爬虫的学习笔记，根据&lt;a href=&quot;https://www.icourse163.org/course/BIT-1001870001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;北京理工大学 Python网络爬虫与信息提取mooc&lt;/a&gt;整理。本文主要阐述了requests库的基本知识以及爬取页面的通用框架。
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="requests库" scheme="http://yoursite.com/blog/categories/%E7%AC%94%E8%AE%B0/Python/%E7%88%AC%E8%99%AB/requests%E5%BA%93/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/blog/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/blog/tags/Python/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/blog/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="requests库" scheme="http://yoursite.com/blog/tags/requests%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>重新开始</title>
+    <link href="http://yoursite.com/blog/2019/08/13/restart/"/>
+    <id>http://yoursite.com/blog/2019/08/13/restart/</id>
+    <published>2019-08-12T16:00:00.000Z</published>
+    <updated>2019-08-13T08:59:04.868Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;如题&quot;&gt;&lt;a href=&quot;#如题&quot; class=&quot;headerlink&quot; title=&quot;如题&quot;&gt;&lt;/a&gt;如题&lt;/h1&gt;
+    
+    </summary>
+    
+    
+      <category term="杂谈" scheme="http://yoursite.com/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="http://yoursite.com/blog/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+</feed>
