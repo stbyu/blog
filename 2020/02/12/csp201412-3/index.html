@@ -96,7 +96,7 @@
 
 
 
-  <meta name="keywords" content="笔记,Python,正则表达式," />
+  <meta name="keywords" content="笔记,csp,模拟," />
 
 
 
@@ -109,19 +109,21 @@
 
 
 
-<meta name="description" content="正则表达式（上）零 什么是正则表达式正则表达式（regular expression，简称RE），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。">
+<meta name="description" content="CCF CSP 201412-3 集合竞价问题描述　　某股票交易所请你编写一个程序，根据开盘前客户提交的订单来确定某特定股票的开盘价和开盘成交量。　　该程序的输入由很多行构成，每一行为一条记录，记录可能有以下几种：　　1. buy p s 表示一个购买股票的买单，每手出价为p，购买股数为s。　　2. sell p s 表示一个出售股票的卖单，每手出价为p，出售股数为s。　　3. cancel i表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python——正则表达式(上)">
-<meta property="og:url" content="http://stbyu.github.io/blog/2019/08/18/python-re/index.html">
+<meta property="og:title" content="CCF CSP 201412-3 集合竞价">
+<meta property="og:url" content="http://stbyu.github.io/blog/2020/02/12/csp201412-3/index.html">
 <meta property="og:site_name" content="Stbyu&#39;s blog">
-<meta property="og:description" content="正则表达式（上）零 什么是正则表达式正则表达式（regular expression，简称RE），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。">
-<meta property="article:published_time" content="2019-08-18T07:25:00.000Z">
-<meta property="article:modified_time" content="2019-08-18T08:00:27.187Z">
+<meta property="og:description" content="CCF CSP 201412-3 集合竞价问题描述　　某股票交易所请你编写一个程序，根据开盘前客户提交的订单来确定某特定股票的开盘价和开盘成交量。　　该程序的输入由很多行构成，每一行为一条记录，记录可能有以下几种：　　1. buy p s 表示一个购买股票的买单，每手出价为p，购买股数为s。　　2. sell p s 表示一个出售股票的卖单，每手出价为p，出售股数为s。　　3. cancel i表">
+<meta property="og:image" content="https://img-blog.csdn.net/20170303205948247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW9yZV91Z2x5X2xlc3NfYnVn/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="article:published_time" content="2020-02-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-12T02:45:06.817Z">
 <meta property="article:author" content="Stbyu">
 <meta property="article:tag" content="笔记">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="正则表达式">
+<meta property="article:tag" content="csp">
+<meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170303205948247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW9yZV91Z2x5X2xlc3NfYnVn/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -151,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="http://stbyu.github.io/blog/2019/08/18/python-re/"/>
+  <link rel="canonical" href="http://stbyu.github.io/blog/2020/02/12/csp201412-3/"/>
 
 
 
 
 
-  <title>Python——正则表达式(上) | Stbyu's blog</title>
+  <title>CCF CSP 201412-3 集合竞价 | Stbyu's blog</title>
   
 
 
@@ -348,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stbyu.github.io/blog/blog/2019/08/18/python-re/">
+    <link itemprop="mainEntityOfPage" href="http://stbyu.github.io/blog/blog/2020/02/12/csp201412-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stbyu">
@@ -365,7 +367,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python——正则表达式(上)</h1>
+          <h1 class="post-title" itemprop="name headline">CCF CSP 201412-3 集合竞价</h1>
         
 
         <div class="post-meta">
@@ -377,8 +379,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-18T15:25:00+08:00">
-                2019-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T00:00:00+08:00">
+                2020-02-12
               </time>
             
 
@@ -411,19 +413,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E7%AC%94%E8%AE%B0/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E7%AC%94%E8%AE%B0/Python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">正则表达式</span>
+                  <a href="/blog/categories/%E7%AC%94%E8%AE%B0/csp/" itemprop="url" rel="index">
+                    <span itemprop="name">csp</span>
                   </a>
                 </span>
 
@@ -453,7 +444,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  516
+                  1.3k
                 </span>
               
 
@@ -469,7 +460,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -490,113 +481,21 @@
       
 
       
-        <h1 id="正则表达式（上）"><a href="#正则表达式（上）" class="headerlink" title="正则表达式（上）"></a>正则表达式（上）</h1><h2 id="零-什么是正则表达式"><a href="#零-什么是正则表达式" class="headerlink" title="零 什么是正则表达式"></a>零 什么是正则表达式</h2><p>正则表达式（<strong>r</strong>egular <strong>e</strong>xpression，简称<strong>RE</strong>），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。<a id="more"></a></p>
-<h2 id="壹-正则表达式的作用"><a href="#壹-正则表达式的作用" class="headerlink" title="壹 正则表达式的作用"></a>壹 正则表达式的作用</h2><ul>
-<li>表达文本类型的特征</li>
-<li>同时查找或替换一组字符串</li>
-<li>匹配字符串的全部或部分</li>
-</ul>
-<h2 id="贰-常用操作符"><a href="#贰-常用操作符" class="headerlink" title="贰 常用操作符"></a>贰 常用操作符</h2><p>因为正则表达式由字符和操作符构成，故应了解常用操作符及其用法。</p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>说明</th>
-<th>实例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>.</td>
-<td>表示任何单个字符</td>
-<td></td>
-</tr>
-<tr>
-<td>[]</td>
-<td>字符集，对单个字符给出取值范围</td>
-<td>[abc]表示a、b、c，[a-z]表示a到z任意单个字符</td>
-</tr>
-<tr>
-<td>[^ ]</td>
-<td>非字符集，对单个字符给出排除范围</td>
-<td>[^abc]表示非a或b或c的单个字符</td>
-</tr>
-<tr>
-<td>*</td>
-<td>前一个字符0次或无限次扩展</td>
-<td>abc*表示ab、abc、abcc、abccc等</td>
-</tr>
-<tr>
-<td>+</td>
-<td>前一个字符1次或无限次扩展</td>
-<td>abc+表示abc、abcc、abccc等</td>
-</tr>
-<tr>
-<td>?</td>
-<td>前一个字符0次或1次扩展</td>
-<td>abc?表示ab、abc等</td>
-</tr>
-<tr>
-<td>&#124;</td>
-<td>左右表达式任意一个</td>
-<td>abc&#124;def表示abc或def</td>
-</tr>
-<tr>
-<td>{m}</td>
-<td>扩展前一个字符m次</td>
-<td>ab{2}表示abbc</td>
-</tr>
-<tr>
-<td>{m,n}</td>
-<td>扩展前一个字符m到n次（含n）</td>
-<td>ab{1,2}表示abc、abbc</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配字符串开头</td>
-<td></td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配字符串结尾</td>
-<td></td>
-</tr>
-<tr>
-<td>()</td>
-<td>分组标记（内部只能使用&#124;操作符）</td>
-<td></td>
-</tr>
-<tr>
-<td>\d</td>
-<td>数字，等价于[0-9]</td>
-<td></td>
-</tr>
-<tr>
-<td>\w</td>
-<td>单词字符，等价于[A-Za-z0-9_]</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="叁-经典正则语法实例"><a href="#叁-经典正则语法实例" class="headerlink" title="叁 经典正则语法实例"></a>叁 经典正则语法实例</h2><p>下面看几个实例（比较简单或前面已经出现过的就不再赘述）</p>
-<table>
-<thead>
-<tr>
-<th>正则表达式</th>
-<th>对应字符串</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>^[A-Za-z]\w{0,31}$</td>
-<td>合法的变量</td>
-</tr>
-<tr>
-<td>[\u4e00-\u9fa5]</td>
-<td>中文字符</td>
-</tr>
-<tr>
-<td>(([1-9]?\d&#124;1\d{2}&#124;2[0-4]\d&#124;25[0-5]).){3}(([1-9]?\d&#124;1\d{2}&#124;2[0-4]\d&#124;25[0-5]).)</td>
-<td>ip地址</td>
-</tr>
-</tbody></table>
+        <h1 id="CCF-CSP-201412-3-集合竞价"><a href="#CCF-CSP-201412-3-集合竞价" class="headerlink" title="CCF CSP 201412-3 集合竞价"></a>CCF CSP 201412-3 集合竞价</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>　　某股票交易所请你编写一个程序，根据开盘前客户提交的订单来确定某特定股票的开盘价和开盘成交量。<br>　　该程序的输入由很多行构成，每一行为一条记录，记录可能有以下几种：<br>　　1. buy p s 表示一个购买股票的买单，每手出价为p，购买股数为s。<br>　　2. sell p s 表示一个出售股票的卖单，每手出价为p，出售股数为s。<br>　　3. cancel i表示撤销第i行的记录。<br>　　如果开盘价为p0，则系统可以将所有出价至少为p0的买单和所有出价至多为p0的卖单进行匹配。因此，此时的开盘成交量为出价至少为p0的买单的总股数和所有出价至多为p0的卖单的总股数之间的较小值。<br>　　你的程序需要确定一个开盘价，使得开盘成交量尽可能地大。如果有多个符合条件的开盘价，你的程序应当输出最高的那一个。<a id="more"></a></p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>　　输入数据有任意多行，每一行是一条记录。保证输入合法。股数为不超过108的正整数，出价为精确到恰好小数点后两位的正实数，且不超过10000.00。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>　　你需要输出一行，包含两个数，以一个空格分隔。第一个数是开盘价，第二个是此开盘价下的成交量。开盘价需要精确到小数点后恰好两位。</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>buy 9.25 100<br>buy 8.88 175<br>sell 9.00 1000<br>buy 9.00 400<br>sell 8.92 400<br>cancel 1<br>buy 100.00 50</p>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>9.00 450</p>
+<h2 id="评测用例规模与约定"><a href="#评测用例规模与约定" class="headerlink" title="评测用例规模与约定"></a>评测用例规模与约定</h2><p>　　对于100%的数据，输入的行数不超过5000。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>​        根据题意可知，我们要求的是使成交量最大的最高的价格，借鉴<a href="https://blog.csdn.net/more_ugly_less_bug/article/details/60147075" target="_blank" rel="noopener">博客</a>的证明可知开盘价一定是输入的p中。为什么呢，将测试案例按p从小到大排列开，如下图所示。图示中各价格用序号标识好，方便说明。</p>
+<p><img src="https://img-blog.csdn.net/20170303205948247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW9yZV91Z2x5X2xlc3NfYnVn/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
+<p>​        （下述最优解意思是可以取到最大开盘价的解）</p>
+<p>​        假设(8.92,9.00)区间（注意是开区间）内某一点p是最优价格，那么大于或等于这个价格的buy点有3、5，小于等于它的sell点有2，那么不管p在区间(8.92,9.00)内怎么浮动，都不影响大于它的sell点和小于它的buy点的选择，都是点2和点3、5。题目要求取最大值，所以在假设在(2,3)区间存在最优价格的情况下，取值可以无限逼近与9.00。</p>
+<p>​        当价格9.00存在sell点时，值取到9.00显然不会改变原有的buy、sell点的选择。</p>
+<p>​        当9.00存在sell点时，取9.00将会影响buy、sell点的选择。在趋于9.00时，设sell的总股数为a，buy的总股数为b。取到9.00时.设sell的总股数为a+c，buy的总股数为b，很容易明白min(a,b) &lt;= min(a+c,b)，即在9.00存在sell点时，得到的结果总会优于趋近于9.00却没有取9.00上的sell点的情况。推广开来，我们可以知道，假设两个点的区间(a,b]上存在最优解，那么b一定也是最优解，且b是最大的，所以b是答案。所以答案一定是存在于已知的点上 。</p>
+<p>​        （又及，十年oi一场空，不开long long见祖宗</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll sum,flag;</span><br><span class="line">	<span class="keyword">double</span> price; </span><br><span class="line">&#125;tic[<span class="number">5005</span>];</span><br><span class="line"><span class="built_in">string</span> a;</span><br><span class="line">ll n,alls,allb,maxs;</span><br><span class="line"><span class="keyword">double</span> maxp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">wly</span><span class="params">(data a,data b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a.price&gt;b.price) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(a.price==b.price &amp;&amp; a.flag&lt;b.flag) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	i=<span class="number">1</span>;n=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a)</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="keyword">if</span>(a==<span class="string">"buy"</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;tic[i].price;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;tic[i].sum;</span><br><span class="line">			tic[i].flag=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">"sell"</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;tic[i].price;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;tic[i].sum;</span><br><span class="line">			tic[i].flag=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">"cancel"</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;j;</span><br><span class="line">			tic[j].price=<span class="number">0.0</span>;</span><br><span class="line">			tic[j].sum=<span class="number">0</span>;</span><br><span class="line">			n--;</span><br><span class="line">		&#125;</span><br><span class="line">		i++;n++;</span><br><span class="line">	&#125;</span><br><span class="line">	n--;</span><br><span class="line">	sort(tic+<span class="number">1</span>,tic+i,wly);</span><br><span class="line">	<span class="comment">//printf("%d %d\n",i,n);</span></span><br><span class="line">	<span class="comment">//for(i=1;i&lt;=n;i++) </span></span><br><span class="line">	<span class="comment">//	printf("%d %lf %d\n",tic[i].sum,tic[i].price,tic[i].flag);</span></span><br><span class="line">	j=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=j;i++)	</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(tic[i].price==tic[i<span class="number">-1</span>].price &amp;&amp; tic[i].flag==tic[i<span class="number">-1</span>].flag)</span><br><span class="line">		&#123;</span><br><span class="line">			tic[i].sum+=tic[i<span class="number">-1</span>].sum;</span><br><span class="line">			tic[i<span class="number">-1</span>].flag=<span class="number">0</span>;tic[i<span class="number">-1</span>].price=<span class="number">0.0</span>;tic[i<span class="number">-1</span>].flag=<span class="number">0</span>;</span><br><span class="line">			n--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	sort(tic+<span class="number">1</span>,tic+i,wly);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) alls+=tic[i].flag*tic[i].sum;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//printf("-%d %d-\n",alls,allb);</span></span><br><span class="line">		<span class="keyword">if</span>(tic[i].flag)</span><br><span class="line">		&#123;</span><br><span class="line">			alls-=tic[i].sum;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		allb+=tic[i].sum;</span><br><span class="line">		<span class="keyword">if</span>(maxs&lt;min(alls,allb))</span><br><span class="line">		&#123;</span><br><span class="line">			maxs=min(alls,allb);</span><br><span class="line">			maxp=tic[i].price;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//for(i=1;i&lt;=n;i++) </span></span><br><span class="line">	<span class="comment">//	printf("%d %lf %d\n",tic[i].sum,tic[i].price,tic[i].flag);</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%.2lf %lld"</span>,maxp,maxs);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -645,9 +544,9 @@
           
             <a href="/blog/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
           
-            <a href="/blog/tags/Python/" rel="tag"># Python</a>
+            <a href="/blog/tags/csp/" rel="tag"># csp</a>
           
-            <a href="/blog/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># 正则表达式</a>
+            <a href="/blog/tags/%E6%A8%A1%E6%8B%9F/" rel="tag"># 模拟</a>
           
         </div>
       
@@ -660,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/08/17/pypc1/" rel="next" title="Python爬虫——requests库入门（上）">
-                <i class="fa fa-chevron-left"></i> Python爬虫——requests库入门（上）
+              <a href="/blog/2020/02/11/csp201409-4/" rel="next" title="CCF CSP 201409-4 最优配餐">
+                <i class="fa fa-chevron-left"></i> CCF CSP 201409-4 最优配餐
               </a>
             
           </div>
@@ -670,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2019/08/19/python-re%EF%BC%882%EF%BC%89/" rel="prev" title="Python——正则表达式(中)">
-                Python——正则表达式(中) <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2020/02/12/csp201403-4%20/" rel="prev" title="CCF CSP 201403-4 无线网络">
+                CCF CSP 201403-4 无线网络 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -832,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式（上）"><span class="nav-number">1.</span> <span class="nav-text">正则表达式（上）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#零-什么是正则表达式"><span class="nav-number">1.1.</span> <span class="nav-text">零 什么是正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#壹-正则表达式的作用"><span class="nav-number">1.2.</span> <span class="nav-text">壹 正则表达式的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贰-常用操作符"><span class="nav-number">1.3.</span> <span class="nav-text">贰 常用操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#叁-经典正则语法实例"><span class="nav-number">1.4.</span> <span class="nav-text">叁 经典正则语法实例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CCF-CSP-201412-3-集合竞价"><span class="nav-number">1.</span> <span class="nav-text">CCF CSP 201412-3 集合竞价</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入"><span class="nav-number">1.4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输出"><span class="nav-number">1.5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评测用例规模与约定"><span class="nav-number">1.6.</span> <span class="nav-text">评测用例规模与约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">1.7.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.8.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
             
 
           </div>
