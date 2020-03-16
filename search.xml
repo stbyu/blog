@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CCF CSP 201403-4 无线网络</title>
-    <url>/blog/2020/02/12/csp201403-4%20/</url>
-    <content><![CDATA[<h1>CCF CSP 201403-4 无线网络</h1>
-<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
-<p>目前在一个很大的平面房间里有 n 个无线路由器,每个无线路由器都固定在某个点上。任何两个无线路由器只要距离不超过 r 就能互相建立网络连接。<br>
-　　除此以外,另有 m 个可以摆放无线路由器的位置。你可以在这些位置中选择至多 k 个增设新的路由器。<br>
-　　你的目标是使得第 1 个路由器和第 2 个路由器之间的网络连接经过尽量少的中转路由器。请问在最优方案下中转路由器的最少个数是多少?<a id="more"></a></p>
-<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
-<p>第一行包含四个正整数 n,m,k,r。(2 ≤ n ≤ 100,1 ≤ k ≤ m ≤ 100, 1 ≤ r ≤ 108)。<br>
-　　接下来 n 行,每行包含两个整数 xi 和 yi,表示一个已经放置好的无线 路由器在 (xi, yi) 点处。输入数据保证第 1 和第 2 个路由器在仅有这 n 个路由器的情况下已经可以互相连接(经过一系列的中转路由器)。<br>
-　　接下来 m 行,每行包含两个整数 xi 和 yi,表示 (xi, yi) 点处可以增设 一个路由器。<br>
-　　输入中所有的坐标的绝对值不超过 108,保证输入中的坐标各不相同。</p>
-<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
-<p>输出只有一个数,即在指定的位置中增设 k 个路由器后,从第 1 个路 由器到第 2 个路由器最少经过的中转路由器的个数。</p>
-<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
-<p>5 3 1 3<br>
-0 0<br>
-5 5<br>
-0 3<br>
-0 5<br>
-3 5<br>
-3 3<br>
-4 4<br>
-3 0</p>
-<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
-<p>2</p>
-<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
-<p>​		根据题意可知，若把距离小于等于r的两路由器视为存在一条边，则题目转化为为求无权无向图的最短路径。这里用spfa跑一遍，在跑的过程中注意已经添加的路由器的个数，若已经达到上限则不再添加。又因为是求中转点的个数，故将最后求得的最短路-1，从而减去终点，求得中转点的个数。</p>
-<p>​		（又及好像可以用分层图做，改天学一下</p>
-<p>​		（又及的又及，经❤️帅气的小天天❤️提醒，这一题边数最多可以到达n^2，我数组开小了😓</p>
-<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll x,y;</span><br><span class="line">&#125;po[<span class="number">20005</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> i,k;</span><br><span class="line">&#125;;</span><br><span class="line">ll r;</span><br><span class="line"><span class="keyword">int</span> n,m,k,ecnt;</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">20005</span>],nxt[<span class="number">40005</span>],too[<span class="number">40005</span>],dis[<span class="number">20005</span>],visit[<span class="number">20005</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d%lld"</span>,&amp;n,&amp;m,&amp;k,&amp;r);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n+m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;po[i].x,&amp;po[i].y);</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(((po[i].x-po[j].x)*(po[i].x-po[j].x))+((po[i].y-po[j].y)*(po[i].y-po[j].y))&lt;=r*r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//printf("-%d %d-\n",i,j);</span></span><br><span class="line">				nxt[++ecnt]=adj[i],adj[i]=ecnt,too[ecnt]=j;</span><br><span class="line">				nxt[++ecnt]=adj[j],adj[j]=ecnt,too[ecnt]=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n+m;i++) dis[i]=<span class="number">2147483647</span>;</span><br><span class="line">	<span class="built_in">queue</span>&lt;data2&gt; q;</span><br><span class="line">	data2 s;</span><br><span class="line">	s.i=<span class="number">1</span>,s.k=<span class="number">0</span>;</span><br><span class="line">	q.push(s);</span><br><span class="line">	dis[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">	visit[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	data2 v,u;</span><br><span class="line">	<span class="keyword">while</span>(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		u=q.front();</span><br><span class="line">		<span class="comment">//printf("%d %d\n",u.i,u.k);</span></span><br><span class="line">		q.pop();</span><br><span class="line">		visit[u.i]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=adj[u.i];i;i=nxt[i])</span><br><span class="line">		&#123;</span><br><span class="line">			v.i=too[i];</span><br><span class="line">			<span class="comment">//printf("-%d %d %d %d %d-\n",u.i,v.i,dis[u.i],dis[v.i],u.k);</span></span><br><span class="line">			<span class="keyword">if</span>(v.i&gt;n &amp;&amp; u.k&gt;=k) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(dis[v.i]&gt;dis[u.i]+<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dis[v.i]=dis[u.i]+<span class="number">1</span>;</span><br><span class="line">				<span class="comment">//printf("+%d %d %d %d %d+\n",u.i,v.i,dis[u.i],dis[v.i],u.k);</span></span><br><span class="line">				<span class="keyword">if</span>(!visit[v.i])</span><br><span class="line">				&#123;</span><br><span class="line">					v.k=u.k;</span><br><span class="line">					<span class="keyword">if</span>(v.i&gt;n) v.k+=<span class="number">1</span>;</span><br><span class="line">					q.push(v);</span><br><span class="line">					visit[v.i]=<span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,dis[<span class="number">2</span>]<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>【瞎折腾向】Windows-Kali双系统安装笔记</title>
+    <url>/blog/2020/03/16/kali_install/</url>
+    <content><![CDATA[<h1>【瞎折腾向】Windows-Kali双系统安装笔记</h1>
+<p>最近因为被某同学怂恿<a href="https://fa555.github.io/" target="_blank" rel="noopener">@fa555</a>装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。<a id="more"></a></p>
+<h2 id="Kali简介"><a class="header-anchor" href="#Kali简介">♔</a>Kali简介</h2>
+<p>Kali Linux是基于<a href="https://baike.baidu.com/item/Debian/748667" target="_blank" rel="noopener">Debian</a>的Linux发行版， 设计用于数字取证操作系统。由Offensive Security Ltd维护和资助。最先由Offensive Security的Mati Aharoni和Devon Kearns通过重写BackTrack来完成，BackTrack是他们之前写的用于取证的Linux发行版 。</p>
+<p>Kali Linux预装了许多渗透测试软件，包括nmap 、Wireshark 、John the Ripper，以及Aircrack-ng.[2] 用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARM Chromebook。</p>
+<h2 id="安装前必要的操作"><a class="header-anchor" href="#安装前必要的操作">♔</a>安装前必要的操作</h2>
+<p>1.分一个存储空间给kali</p>
+<p>2.一个8G及以上的U盘</p>
+<p>3.安装软碟通或Win32DiskImager</p>
+<p>4.下载kali镜像</p>
+<h2 id="给kali分配存储空间"><a class="header-anchor" href="#给kali分配存储空间">♔</a>给kali分配存储空间</h2>
+<p>因为我是<strong>双硬盘</strong>，所以先在C盘（按理来说就是电脑的第一块硬盘，部分电脑系统装得比较奇怪，装到了第二块硬盘）分出200M的空白分区用来安装ubuntu的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD两个盘的最后一个是D盘，CDE盘的最后一个是E盘，CDEF盘的最后一个是F盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M,如果空间充足，建议分出80G或100G，空间不足也可以分60G（1G=1024M）</p>
+<p><img src="https://img2018.cnblogs.com/blog/1628751/201905/1628751-20190510155645369-1469851559.png" alt="img"></p>
+<h2 id="制作kali启动盘"><a class="header-anchor" href="#制作kali启动盘">♔</a>制作kali启动盘</h2>
+<h3 id="使用软碟通"><a class="header-anchor" href="#使用软碟通">♔</a>使用软碟通</h3>
+<p>选择放有iso文件的文件夹</p>
+<p>双击iso文件</p>
+<p>点击启动，选择写入硬盘映像</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/15630102-909c2f49ffc88d5f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/770/format/webp" alt="img"></p>
+<p>这里要将写入方式改为<strong>raw</strong>，然后点击写入即可(如果写入后出现是否格式化U盘，一定不要点，不然就白做了)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/15630102-b11ce35ba65fdb31.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/540/format/webp" alt="img"></p>
+<h2 id="进入BIOS关闭SecureBoot"><a class="header-anchor" href="#进入BIOS关闭SecureBoot">♔</a>进入BIOS关闭SecureBoot</h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/15630102-8965f09212ed7539.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/712/format/webp" alt="img"></p>
+<p>然后重启电脑选择U盘启动。</p>
+<h2 id="安装kali"><a class="header-anchor" href="#安装kali">♔</a>安装kali</h2>
+<p>选择start installer,语言选中文，然后配置网卡（为了方便可以不先配置），然后设置主机名，域名(默认，空着就行了)，root密码等等。</p>
+<p>然后<strong>选择手动分区</strong>，你可以看到两个空闲分区，其中一个大小是你分区时给定的；另一个空闲分区，大小200M左右</p>
+<p>在这里，我们进行手动分区，假设你留出的空闲分区为 80G，点击空闲盘符，点击&quot;+&quot;进行分区，如下：</p>
+<p>1）efi：因为我是<strong>双硬盘</strong>，找到事先分好的200M空闲分区添加，逻辑分区，空间起始位置，用于efi。这个分区必不可少，用于安装ubuntu启动项。以下步骤都在那个80G的空闲分区上添加</p>
+<p>2）swap:中文是&quot;交换空间&quot;，充当ubuntu的虚拟内存，一般的大小为电脑物理内存的2倍左右，可以将其分为 16G，逻辑分区，空间起始位置，用于&quot;swap&quot;或&quot;交换空间&quot;</p>
+<ol start="3">
+<li>/:这是ubuntu 的根目录,用于安装系统和软件，相当于windows的C盘，我们将其分为 20G，主分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/&quot;（根据你的磁盘空间调整，可以大一点，毕竟ubuntu装软件都是默认装在根目录的）</li>
+</ol>
+<p>4）/home:相当于windows的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/home&quot;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/15630102-55ad985475b4969d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/628/format/webp" alt="img"></p>
+<p>至此分区结束，然后等待安装完成后自动重启，选择kali启动就可以进入系统了。</p>
+<h2 id="参考文献"><a class="header-anchor" href="#参考文献">♔</a>参考文献</h2>
+<p><a href="https://www.jianshu.com/p/6d90d8084128" target="_blank" rel="noopener">Windows-Kali双系统安装教程</a></p>
+<p><a href="https://www.cnblogs.com/masbay/p/11627727.html" target="_blank" rel="noopener">Windows10安装ubuntu18.04双系统教程</a></p>
 ]]></content>
       <categories>
-        <category>笔记</category>
-        <category>csp</category>
+        <category>瞎折腾</category>
+        <category>双系统</category>
+        <category>Kali Linux</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>csp</tag>
-        <tag>图论</tag>
-        <tag>最短路</tag>
-        <tag>spfa</tag>
+        <tag>瞎折腾</tag>
+        <tag>双系统</tag>
+        <tag>Kali</tag>
+        <tag>Linux</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -93,6 +103,52 @@ buy 100.00 50</p>
         <tag>笔记</tag>
         <tag>csp</tag>
         <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CCF CSP 201403-4 无线网络</title>
+    <url>/blog/2020/02/12/csp201403-4%20/</url>
+    <content><![CDATA[<h1>CCF CSP 201403-4 无线网络</h1>
+<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
+<p>目前在一个很大的平面房间里有 n 个无线路由器,每个无线路由器都固定在某个点上。任何两个无线路由器只要距离不超过 r 就能互相建立网络连接。<br>
+　　除此以外,另有 m 个可以摆放无线路由器的位置。你可以在这些位置中选择至多 k 个增设新的路由器。<br>
+　　你的目标是使得第 1 个路由器和第 2 个路由器之间的网络连接经过尽量少的中转路由器。请问在最优方案下中转路由器的最少个数是多少?<a id="more"></a></p>
+<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
+<p>第一行包含四个正整数 n,m,k,r。(2 ≤ n ≤ 100,1 ≤ k ≤ m ≤ 100, 1 ≤ r ≤ 108)。<br>
+　　接下来 n 行,每行包含两个整数 xi 和 yi,表示一个已经放置好的无线 路由器在 (xi, yi) 点处。输入数据保证第 1 和第 2 个路由器在仅有这 n 个路由器的情况下已经可以互相连接(经过一系列的中转路由器)。<br>
+　　接下来 m 行,每行包含两个整数 xi 和 yi,表示 (xi, yi) 点处可以增设 一个路由器。<br>
+　　输入中所有的坐标的绝对值不超过 108,保证输入中的坐标各不相同。</p>
+<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
+<p>输出只有一个数,即在指定的位置中增设 k 个路由器后,从第 1 个路 由器到第 2 个路由器最少经过的中转路由器的个数。</p>
+<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
+<p>5 3 1 3<br>
+0 0<br>
+5 5<br>
+0 3<br>
+0 5<br>
+3 5<br>
+3 3<br>
+4 4<br>
+3 0</p>
+<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
+<p>2</p>
+<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
+<p>​		根据题意可知，若把距离小于等于r的两路由器视为存在一条边，则题目转化为为求无权无向图的最短路径。这里用spfa跑一遍，在跑的过程中注意已经添加的路由器的个数，若已经达到上限则不再添加。又因为是求中转点的个数，故将最后求得的最短路-1，从而减去终点，求得中转点的个数。</p>
+<p>​		（又及好像可以用分层图做，改天学一下</p>
+<p>​		（又及的又及，经❤️帅气的小天天❤️提醒，这一题边数最多可以到达n^2，我数组开小了😓</p>
+<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll x,y;</span><br><span class="line">&#125;po[<span class="number">20005</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> i,k;</span><br><span class="line">&#125;;</span><br><span class="line">ll r;</span><br><span class="line"><span class="keyword">int</span> n,m,k,ecnt;</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">20005</span>],nxt[<span class="number">40005</span>],too[<span class="number">40005</span>],dis[<span class="number">20005</span>],visit[<span class="number">20005</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d%lld"</span>,&amp;n,&amp;m,&amp;k,&amp;r);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n+m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;po[i].x,&amp;po[i].y);</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(((po[i].x-po[j].x)*(po[i].x-po[j].x))+((po[i].y-po[j].y)*(po[i].y-po[j].y))&lt;=r*r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//printf("-%d %d-\n",i,j);</span></span><br><span class="line">				nxt[++ecnt]=adj[i],adj[i]=ecnt,too[ecnt]=j;</span><br><span class="line">				nxt[++ecnt]=adj[j],adj[j]=ecnt,too[ecnt]=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n+m;i++) dis[i]=<span class="number">2147483647</span>;</span><br><span class="line">	<span class="built_in">queue</span>&lt;data2&gt; q;</span><br><span class="line">	data2 s;</span><br><span class="line">	s.i=<span class="number">1</span>,s.k=<span class="number">0</span>;</span><br><span class="line">	q.push(s);</span><br><span class="line">	dis[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">	visit[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	data2 v,u;</span><br><span class="line">	<span class="keyword">while</span>(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		u=q.front();</span><br><span class="line">		<span class="comment">//printf("%d %d\n",u.i,u.k);</span></span><br><span class="line">		q.pop();</span><br><span class="line">		visit[u.i]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=adj[u.i];i;i=nxt[i])</span><br><span class="line">		&#123;</span><br><span class="line">			v.i=too[i];</span><br><span class="line">			<span class="comment">//printf("-%d %d %d %d %d-\n",u.i,v.i,dis[u.i],dis[v.i],u.k);</span></span><br><span class="line">			<span class="keyword">if</span>(v.i&gt;n &amp;&amp; u.k&gt;=k) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(dis[v.i]&gt;dis[u.i]+<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dis[v.i]=dis[u.i]+<span class="number">1</span>;</span><br><span class="line">				<span class="comment">//printf("+%d %d %d %d %d+\n",u.i,v.i,dis[u.i],dis[v.i],u.k);</span></span><br><span class="line">				<span class="keyword">if</span>(!visit[v.i])</span><br><span class="line">				&#123;</span><br><span class="line">					v.k=u.k;</span><br><span class="line">					<span class="keyword">if</span>(v.i&gt;n) v.k+=<span class="number">1</span>;</span><br><span class="line">					q.push(v);</span><br><span class="line">					visit[v.i]=<span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,dis[<span class="number">2</span>]<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>csp</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>csp</tag>
+        <tag>图论</tag>
+        <tag>最短路</tag>
+        <tag>spfa</tag>
       </tags>
   </entry>
   <entry>
@@ -159,111 +215,6 @@ buy 100.00 50</p>
       </tags>
   </entry>
   <entry>
-    <title>【瞎折腾向】Windows-Kali双系统安装笔记</title>
-    <url>/blog/2020/02/12/kali_install/</url>
-    <content><![CDATA[<h1>【瞎折腾向】Windows-Kali双系统安装笔记</h1>
-<p>最近因为被某同学怂恿<a href="https://fa555.github.io/" target="_blank" rel="noopener">@fa555</a>装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。<a id="more"></a></p>
-<h2 id="Kali简介"><a class="header-anchor" href="#Kali简介">♔</a>Kali简介</h2>
-<p>Kali Linux是基于<a href="https://baike.baidu.com/item/Debian/748667" target="_blank" rel="noopener">Debian</a>的Linux发行版， 设计用于数字取证操作系统。由Offensive Security Ltd维护和资助。最先由Offensive Security的Mati Aharoni和Devon Kearns通过重写BackTrack来完成，BackTrack是他们之前写的用于取证的Linux发行版 。</p>
-<p>Kali Linux预装了许多渗透测试软件，包括nmap 、Wireshark 、John the Ripper，以及Aircrack-ng.[2] 用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARM Chromebook。</p>
-<h2 id="安装前必要的操作"><a class="header-anchor" href="#安装前必要的操作">♔</a>安装前必要的操作</h2>
-<p>1.分一个存储空间给kali</p>
-<p>2.一个8G及以上的U盘</p>
-<p>3.安装软碟通或Win32DiskImager</p>
-<p>4.下载kali镜像</p>
-<h2 id="给kali分配存储空间"><a class="header-anchor" href="#给kali分配存储空间">♔</a>给kali分配存储空间</h2>
-<p>因为我是<strong>双硬盘</strong>，所以先在C盘（按理来说就是电脑的第一块硬盘，部分电脑系统装得比较奇怪，装到了第二块硬盘）分出200M的空白分区用来安装ubuntu的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD两个盘的最后一个是D盘，CDE盘的最后一个是E盘，CDEF盘的最后一个是F盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M,如果空间充足，建议分出80G或100G，空间不足也可以分60G（1G=1024M）</p>
-<p><img src="https://img2018.cnblogs.com/blog/1628751/201905/1628751-20190510155645369-1469851559.png" alt="img"></p>
-<h2 id="制作kali启动盘"><a class="header-anchor" href="#制作kali启动盘">♔</a>制作kali启动盘</h2>
-<h3 id="使用软碟通"><a class="header-anchor" href="#使用软碟通">♔</a>使用软碟通</h3>
-<p>选择放有iso文件的文件夹</p>
-<p>双击iso文件</p>
-<p>点击启动，选择写入硬盘映像</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/15630102-909c2f49ffc88d5f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/770/format/webp" alt="img"></p>
-<p>这里要将写入方式改为<strong>raw</strong>，然后点击写入即可(如果写入后出现是否格式化U盘，一定不要点，不然就白做了)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/15630102-b11ce35ba65fdb31.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/540/format/webp" alt="img"></p>
-<h2 id="进入BIOS关闭SecureBoot"><a class="header-anchor" href="#进入BIOS关闭SecureBoot">♔</a>进入BIOS关闭SecureBoot</h2>
-<p><img src="https://upload-images.jianshu.io/upload_images/15630102-8965f09212ed7539.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/712/format/webp" alt="img"></p>
-<p>然后重启电脑选择U盘启动。</p>
-<h2 id="安装kali"><a class="header-anchor" href="#安装kali">♔</a>安装kali</h2>
-<p>选择start installer,语言选中文，然后配置网卡（为了方便可以不先配置），然后设置主机名，域名(默认，空着就行了)，root密码等等。</p>
-<p>然后<strong>选择手动分区</strong>，你可以看到两个空闲分区，其中一个大小是你分区时给定的；另一个空闲分区，大小200M左右</p>
-<p>在这里，我们进行手动分区，假设你留出的空闲分区为 80G，点击空闲盘符，点击&quot;+&quot;进行分区，如下：</p>
-<p>1）efi：因为我是<strong>双硬盘</strong>，找到事先分好的200M空闲分区添加，逻辑分区，空间起始位置，用于efi。这个分区必不可少，用于安装ubuntu启动项。以下步骤都在那个80G的空闲分区上添加</p>
-<p>2）swap:中文是&quot;交换空间&quot;，充当ubuntu的虚拟内存，一般的大小为电脑物理内存的2倍左右，可以将其分为 16G，逻辑分区，空间起始位置，用于&quot;swap&quot;或&quot;交换空间&quot;</p>
-<ol start="3">
-<li>/:这是ubuntu 的根目录,用于安装系统和软件，相当于windows的C盘，我们将其分为 20G，主分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/&quot;（根据你的磁盘空间调整，可以大一点，毕竟ubuntu装软件都是默认装在根目录的）</li>
-</ol>
-<p>4）/home:相当于windows的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/home&quot;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/15630102-55ad985475b4969d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/628/format/webp" alt="img"></p>
-<p>至此分区结束，然后等待安装完成后自动重启，选择kali启动就可以进入系统了。</p>
-<h2 id="参考文献"><a class="header-anchor" href="#参考文献">♔</a>参考文献</h2>
-<p><a href="https://www.jianshu.com/p/6d90d8084128" target="_blank" rel="noopener">Windows-Kali双系统安装教程</a></p>
-<p><a href="https://www.cnblogs.com/masbay/p/11627727.html" target="_blank" rel="noopener">Windows10安装ubuntu18.04双系统教程</a></p>
-]]></content>
-      <categories>
-        <category>瞎折腾</category>
-        <category>双系统</category>
-        <category>Kali Linux</category>
-      </categories>
-      <tags>
-        <tag>瞎折腾</tag>
-        <tag>双系统</tag>
-        <tag>Kali</tag>
-        <tag>Linux</tag>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CCF CSP 201509-4 高速公路</title>
-    <url>/blog/2020/02/11/csp201509-4/</url>
-    <content><![CDATA[<h1>CCF CSP 201509-4 高速公路</h1>
-<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
-<p>某国有<em>n</em>个城市，为了使得城市间的交通更便利，该国国王打算在城市之间修一些高速公路，由于经费限制，国王打算第一阶段先在部分城市之间修一些单向的高速公路。<br>
-　　现在，大臣们帮国王拟了一个修高速公路的计划。看了计划后，国王发现，有些城市之间可以通过高速公路直接（不经过其他城市）或间接（经过一个或多个其他城市）到达，而有的却不能。如果城市A可以通过高速公路到达城市B，而且城市B也可以通过高速公路到达城市A，则这两个城市被称为便利城市对。<br>
-　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。<a id="more"></a></p>
-<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
-<p>输入的第一行包含两个整数<em>n</em>, <em>m</em>，分别表示城市和单向高速公路的数量。<br>
-　　接下来<em>m</em>行，每行两个整数<em>a</em>, <em>b</em>，表示城市<em>a</em>有一条单向的高速公路连向城市<em>b</em>。</p>
-<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
-<p>输出一行，包含一个整数，表示便利城市对的数量。</p>
-<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
-<p>5 5<br>
-1 2<br>
-2 3<br>
-3 4<br>
-4 2<br>
-3 5</p>
-<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
-<p>3</p>
-<h2 id="样例说明"><a class="header-anchor" href="#样例说明">♔</a>样例说明</h2>
-<p><img src="http://118.190.20.162/RequireFile.do?fid=4HG9GgbF" alt="img"></p>
-<p>​		城市间的连接如图所示。有3个便利城市对，它们分别是(2, 3), (2, 4), (3, 4)，请注意(2, 3)和(3, 2)看成同一个便利城市对。</p>
-<h2 id="评测用例规模与约定"><a class="header-anchor" href="#评测用例规模与约定">♔</a>评测用例规模与约定</h2>
-<p>前30%的评测用例满足1 ≤ <em>n</em> ≤ 100, 1 ≤ <em>m</em> ≤ 1000；<br>
-　　前60%的评测用例满足1 ≤ <em>n</em> ≤ 1000, 1 ≤ <em>m</em> ≤ 10000；<br>
-　　所有评测用例满足1 ≤ <em>n</em> ≤ 10000, 1 ≤ <em>m</em> ≤ 100000。</p>
-<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
-<p>​		根据题意可知，我们只要分别求出图中各个连通分量所包含的节点数目，即可分别计算出便利城市对数，然后将各个连通分量的便利城市对数相加就可以了。题目不难，只要套个Tarjan板子就可以做，但迷惑的是我的板子好像是错的？？？我的模板是这么写的，只能得80分</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(dfn[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
-<p>​		后来找的板子是这样的，可以a掉</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dfn[<span class="number">100005</span>],low[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> m,n,times;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[<span class="number">100005</span>],visit[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> top,cnt,sum[<span class="number">100005</span>],icnt,isum[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">100005</span>],nxt[<span class="number">200005</span>],to[<span class="number">200005</span>],ecnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">adde</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	nxt[++ecnt]=adj[x],adj[x]=ecnt,to[ecnt]=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	visit[u]=<span class="number">1</span>,<span class="built_in">stack</span>[++top]=u;</span><br><span class="line">	dfn[u]=low[u]=++times;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=adj[u];i;i=nxt[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v=to[i];</span><br><span class="line">		<span class="keyword">if</span>(!dfn[v])</span><br><span class="line">		&#123;</span><br><span class="line">			Tarjan(v);</span><br><span class="line">			low[u]=min(low[u],low[v]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[u]==low[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		icnt++; </span><br><span class="line">		visit[u]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(v=<span class="built_in">stack</span>[top--],isum[icnt]++,v!=u) visit[v]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">		adde(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) </span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) Tarjan(i);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=icnt;i++) </span><br><span class="line">		ans+=isum[i]*(isum[i]<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>csp</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>csp</tag>
-        <tag>图论</tag>
-        <tag>Tarjan</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CCF CSP 201409-4 最优配餐</title>
     <url>/blog/2020/02/11/csp201409-4/</url>
     <content><![CDATA[<h1>CCF CSP 201409-4 最优配餐</h1>
@@ -313,6 +264,55 @@ buy 100.00 50</p>
         <tag>csp</tag>
         <tag>图论</tag>
         <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CCF CSP 201509-4 高速公路</title>
+    <url>/blog/2020/02/11/csp201509-4/</url>
+    <content><![CDATA[<h1>CCF CSP 201509-4 高速公路</h1>
+<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
+<p>某国有<em>n</em>个城市，为了使得城市间的交通更便利，该国国王打算在城市之间修一些高速公路，由于经费限制，国王打算第一阶段先在部分城市之间修一些单向的高速公路。<br>
+　　现在，大臣们帮国王拟了一个修高速公路的计划。看了计划后，国王发现，有些城市之间可以通过高速公路直接（不经过其他城市）或间接（经过一个或多个其他城市）到达，而有的却不能。如果城市A可以通过高速公路到达城市B，而且城市B也可以通过高速公路到达城市A，则这两个城市被称为便利城市对。<br>
+　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。<a id="more"></a></p>
+<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
+<p>输入的第一行包含两个整数<em>n</em>, <em>m</em>，分别表示城市和单向高速公路的数量。<br>
+　　接下来<em>m</em>行，每行两个整数<em>a</em>, <em>b</em>，表示城市<em>a</em>有一条单向的高速公路连向城市<em>b</em>。</p>
+<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
+<p>输出一行，包含一个整数，表示便利城市对的数量。</p>
+<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
+<p>5 5<br>
+1 2<br>
+2 3<br>
+3 4<br>
+4 2<br>
+3 5</p>
+<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
+<p>3</p>
+<h2 id="样例说明"><a class="header-anchor" href="#样例说明">♔</a>样例说明</h2>
+<p><img src="http://118.190.20.162/RequireFile.do?fid=4HG9GgbF" alt="img"></p>
+<p>​		城市间的连接如图所示。有3个便利城市对，它们分别是(2, 3), (2, 4), (3, 4)，请注意(2, 3)和(3, 2)看成同一个便利城市对。</p>
+<h2 id="评测用例规模与约定"><a class="header-anchor" href="#评测用例规模与约定">♔</a>评测用例规模与约定</h2>
+<p>前30%的评测用例满足1 ≤ <em>n</em> ≤ 100, 1 ≤ <em>m</em> ≤ 1000；<br>
+　　前60%的评测用例满足1 ≤ <em>n</em> ≤ 1000, 1 ≤ <em>m</em> ≤ 10000；<br>
+　　所有评测用例满足1 ≤ <em>n</em> ≤ 10000, 1 ≤ <em>m</em> ≤ 100000。</p>
+<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
+<p>​		根据题意可知，我们只要分别求出图中各个连通分量所包含的节点数目，即可分别计算出便利城市对数，然后将各个连通分量的便利城市对数相加就可以了。题目不难，只要套个Tarjan板子就可以做，但迷惑的是我的板子好像是错的？？？我的模板是这么写的，只能得80分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(dfn[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
+<p>​		后来找的板子是这样的，可以a掉</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dfn[<span class="number">100005</span>],low[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> m,n,times;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[<span class="number">100005</span>],visit[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> top,cnt,sum[<span class="number">100005</span>],icnt,isum[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">100005</span>],nxt[<span class="number">200005</span>],to[<span class="number">200005</span>],ecnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">adde</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	nxt[++ecnt]=adj[x],adj[x]=ecnt,to[ecnt]=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	visit[u]=<span class="number">1</span>,<span class="built_in">stack</span>[++top]=u;</span><br><span class="line">	dfn[u]=low[u]=++times;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=adj[u];i;i=nxt[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v=to[i];</span><br><span class="line">		<span class="keyword">if</span>(!dfn[v])</span><br><span class="line">		&#123;</span><br><span class="line">			Tarjan(v);</span><br><span class="line">			low[u]=min(low[u],low[v]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[u]==low[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		icnt++; </span><br><span class="line">		visit[u]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(v=<span class="built_in">stack</span>[top--],isum[icnt]++,v!=u) visit[v]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">		adde(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) </span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) Tarjan(i);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=icnt;i++) </span><br><span class="line">		ans+=isum[i]*(isum[i]<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>csp</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>csp</tag>
+        <tag>图论</tag>
+        <tag>Tarjan</tag>
       </tags>
   </entry>
   <entry>
