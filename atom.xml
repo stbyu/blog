@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://stbyu.github.io/blog/"/>
-  <updated>2020-03-16T09:30:28.260Z</updated>
+  <updated>2020-03-16T09:43:24.294Z</updated>
   <id>http://stbyu.github.io/blog/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="http://stbyu.github.io/blog/2020/03/16/kali_install/"/>
     <id>http://stbyu.github.io/blog/2020/03/16/kali_install/</id>
     <published>2020-03-15T16:00:00.000Z</published>
-    <updated>2020-03-16T09:30:28.260Z</updated>
+    <updated>2020-03-16T09:43:24.294Z</updated>
     
-    <content type="html"><![CDATA[<h1>【瞎折腾向】Windows-Kali双系统安装笔记</h1><p>最近因为被某同学怂恿<a href="https://fa555.github.io/" target="_blank" rel="noopener">@fa555</a>装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。<a id="more"></a></p><h2 id="Kali简介"><a class="header-anchor" href="#Kali简介">♔</a>Kali简介</h2><p>Kali Linux是基于<a href="https://baike.baidu.com/item/Debian/748667" target="_blank" rel="noopener">Debian</a>的Linux发行版， 设计用于数字取证操作系统。由Offensive Security Ltd维护和资助。最先由Offensive Security的Mati Aharoni和Devon Kearns通过重写BackTrack来完成，BackTrack是他们之前写的用于取证的Linux发行版 。</p><p>Kali Linux预装了许多渗透测试软件，包括nmap 、Wireshark 、John the Ripper，以及Aircrack-ng.[2] 用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARM Chromebook。</p><h2 id="安装前必要的操作"><a class="header-anchor" href="#安装前必要的操作">♔</a>安装前必要的操作</h2><p>1.分一个存储空间给kali</p><p>2.一个8G及以上的U盘</p><p>3.安装软碟通或Win32DiskImager</p><p>4.下载kali镜像</p><h2 id="给kali分配存储空间"><a class="header-anchor" href="#给kali分配存储空间">♔</a>给kali分配存储空间</h2><p>因为我是<strong>双硬盘</strong>，所以先在C盘（按理来说就是电脑的第一块硬盘，部分电脑系统装得比较奇怪，装到了第二块硬盘）分出200M的空白分区用来安装ubuntu的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD两个盘的最后一个是D盘，CDE盘的最后一个是E盘，CDEF盘的最后一个是F盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M,如果空间充足，建议分出80G或100G，空间不足也可以分60G（1G=1024M）</p><p><img src="%5Cpic%5C1628751-20190510155645369-1469851559.png" alt="img"></p><h2 id="制作kali启动盘"><a class="header-anchor" href="#制作kali启动盘">♔</a>制作kali启动盘</h2><h3 id="使用软碟通"><a class="header-anchor" href="#使用软碟通">♔</a>使用软碟通</h3><p>选择放有iso文件的文件夹</p><p>双击iso文件</p><p>点击启动，选择写入硬盘映像</p><p><img src="%5Cpic%5Cb.png" alt="img"></p><p>这里要将写入方式改为<strong>raw</strong>，然后点击写入即可(如果写入后出现是否格式化U盘，一定不要点，不然就白做了)</p><p><img src="%5Cpic%5Ca.png" alt="img"></p><h2 id="进入BIOS关闭SecureBoot"><a class="header-anchor" href="#进入BIOS关闭SecureBoot">♔</a>进入BIOS关闭SecureBoot</h2><p><img src="%5Cpic%5Cc.jpg" alt="img"></p><p>然后重启电脑选择U盘启动。</p><h2 id="安装kali"><a class="header-anchor" href="#安装kali">♔</a>安装kali</h2><p>选择start installer,语言选中文，然后配置网卡（为了方便可以不先配置），然后设置主机名，域名(默认，空着就行了)，root密码等等。</p><p>然后<strong>选择手动分区</strong>，你可以看到两个空闲分区，其中一个大小是你分区时给定的；另一个空闲分区，大小200M左右</p><p>在这里，我们进行手动分区，假设你留出的空闲分区为 80G，点击空闲盘符，点击&quot;+&quot;进行分区，如下：</p><p>1）efi：因为我是<strong>双硬盘</strong>，找到事先分好的200M空闲分区添加，逻辑分区，空间起始位置，用于efi。这个分区必不可少，用于安装ubuntu启动项。以下步骤都在那个80G的空闲分区上添加</p><p>2）swap:中文是&quot;交换空间&quot;，充当ubuntu的虚拟内存，一般的大小为电脑物理内存的2倍左右，可以将其分为 16G，逻辑分区，空间起始位置，用于&quot;swap&quot;或&quot;交换空间&quot;</p><ol start="3"><li>/:这是ubuntu 的根目录,用于安装系统和软件，相当于windows的C盘，我们将其分为 20G，主分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/&quot;（根据你的磁盘空间调整，可以大一点，毕竟ubuntu装软件都是默认装在根目录的）</li></ol><p>4）/home:相当于windows的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/home&quot;</p><p><img src="%5Cpic%5Cd.png" alt="img"></p><p>至此分区结束，然后等待安装完成后自动重启，选择kali启动就可以进入系统了。</p><h2 id="参考文献"><a class="header-anchor" href="#参考文献">♔</a>参考文献</h2><p><a href="https://www.jianshu.com/p/6d90d8084128" target="_blank" rel="noopener">Windows-Kali双系统安装教程</a></p><p><a href="https://www.cnblogs.com/masbay/p/11627727.html" target="_blank" rel="noopener">Windows10安装ubuntu18.04双系统教程</a></p>]]></content>
+    <content type="html"><![CDATA[<h1>【瞎折腾向】Windows-Kali双系统安装笔记</h1><p>最近因为被某同学怂恿<a href="https://fa555.github.io/" target="_blank" rel="noopener">@fa555</a>装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。<a id="more"></a></p><h2 id="Kali简介"><a class="header-anchor" href="#Kali简介">♔</a>Kali简介</h2><p>Kali Linux是基于<a href="https://baike.baidu.com/item/Debian/748667" target="_blank" rel="noopener">Debian</a>的Linux发行版， 设计用于数字取证操作系统。由Offensive Security Ltd维护和资助。最先由Offensive Security的Mati Aharoni和Devon Kearns通过重写BackTrack来完成，BackTrack是他们之前写的用于取证的Linux发行版 。</p><p>Kali Linux预装了许多渗透测试软件，包括nmap 、Wireshark 、John the Ripper，以及Aircrack-ng.[2] 用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARM Chromebook。</p><h2 id="安装前必要的操作"><a class="header-anchor" href="#安装前必要的操作">♔</a>安装前必要的操作</h2><p>1.分一个存储空间给kali</p><p>2.一个8G及以上的U盘</p><p>3.安装软碟通或Win32DiskImager</p><p>4.下载kali镜像</p><h2 id="给kali分配存储空间"><a class="header-anchor" href="#给kali分配存储空间">♔</a>给kali分配存储空间</h2><p>因为我是<strong>双硬盘</strong>，所以先在C盘（按理来说就是电脑的第一块硬盘，部分电脑系统装得比较奇怪，装到了第二块硬盘）分出200M的空白分区用来安装ubuntu的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD两个盘的最后一个是D盘，CDE盘的最后一个是E盘，CDEF盘的最后一个是F盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M,如果空间充足，建议分出80G或100G，空间不足也可以分60G（1G=1024M）</p><p><img src="/blog/blog/2020/03/16/kali_install/1628751-20190510155645369-1469851559.png" alt="img"></p><h2 id="制作kali启动盘"><a class="header-anchor" href="#制作kali启动盘">♔</a>制作kali启动盘</h2><h3 id="使用软碟通"><a class="header-anchor" href="#使用软碟通">♔</a>使用软碟通</h3><p>选择放有iso文件的文件夹</p><p>双击iso文件</p><p>点击启动，选择写入硬盘映像</p><p><img src="/blog/blog/2020/03/16/kali_install/b.png" alt="img"></p><p>这里要将写入方式改为<strong>raw</strong>，然后点击写入即可(如果写入后出现是否格式化U盘，一定不要点，不然就白做了)</p><p><img src="/blog/blog/2020/03/16/kali_install/a.png" alt="img"></p><h2 id="进入BIOS关闭SecureBoot"><a class="header-anchor" href="#进入BIOS关闭SecureBoot">♔</a>进入BIOS关闭SecureBoot</h2><p><img src="/blog/blog/2020/03/16/kali_install/c.jpg" alt="img"></p><p>然后重启电脑选择U盘启动。</p><h2 id="安装kali"><a class="header-anchor" href="#安装kali">♔</a>安装kali</h2><p>选择start installer,语言选中文，然后配置网卡（为了方便可以不先配置），然后设置主机名，域名(默认，空着就行了)，root密码等等。</p><p>然后<strong>选择手动分区</strong>，你可以看到两个空闲分区，其中一个大小是你分区时给定的；另一个空闲分区，大小200M左右</p><p>在这里，我们进行手动分区，假设你留出的空闲分区为 80G，点击空闲盘符，点击&quot;+&quot;进行分区，如下：</p><p>1）efi：因为我是<strong>双硬盘</strong>，找到事先分好的200M空闲分区添加，逻辑分区，空间起始位置，用于efi。这个分区必不可少，用于安装ubuntu启动项。以下步骤都在那个80G的空闲分区上添加</p><p>2）swap:中文是&quot;交换空间&quot;，充当ubuntu的虚拟内存，一般的大小为电脑物理内存的2倍左右，可以将其分为 16G，逻辑分区，空间起始位置，用于&quot;swap&quot;或&quot;交换空间&quot;</p><ol start="3"><li>/:这是ubuntu 的根目录,用于安装系统和软件，相当于windows的C盘，我们将其分为 20G，主分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/&quot;（根据你的磁盘空间调整，可以大一点，毕竟ubuntu装软件都是默认装在根目录的）</li></ol><p>4）/home:相当于windows的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/home&quot;</p><p><img src="/blog/blog/2020/03/16/kali_install/d.png" alt="img"></p><p>至此分区结束，然后等待安装完成后自动重启，选择kali启动就可以进入系统了。</p><h2 id="参考文献"><a class="header-anchor" href="#参考文献">♔</a>参考文献</h2><p><a href="https://www.jianshu.com/p/6d90d8084128" target="_blank" rel="noopener">Windows-Kali双系统安装教程</a></p><p><a href="https://www.cnblogs.com/masbay/p/11627727.html" target="_blank" rel="noopener">Windows10安装ubuntu18.04双系统教程</a></p>]]></content>
     
     <summary type="html">
     
       &lt;h1&gt;【瞎折腾向】Windows-Kali双系统安装笔记&lt;/h1&gt;
-&lt;p&gt;最近因为被某同学怂恿&lt;a href=&quot;https://fa555.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@fa555&lt;/a&gt;装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。
+&lt;p&gt;最近因为被某同学怂恿&lt;a href=&quot;https://fa555.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@fa555&lt;/a&gt;装了Ubuntu18和win10的双系统，但不知为何一直无法使用无线网卡，所以就一直搁置在那里。然后近日突然想搞个Kali玩玩于是准备用Kali替换掉Ubuntu18，现在把过程记录在这里。&lt;/p&gt;
     
     </summary>
     
@@ -67,7 +67,7 @@
 &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#问题描述&quot;&gt;♔&lt;/a&gt;问题描述&lt;/h2&gt;
 &lt;p&gt;目前在一个很大的平面房间里有 n 个无线路由器,每个无线路由器都固定在某个点上。任何两个无线路由器只要距离不超过 r 就能互相建立网络连接。&lt;br&gt;
 　　除此以外,另有 m 个可以摆放无线路由器的位置。你可以在这些位置中选择至多 k 个增设新的路由器。&lt;br&gt;
-　　你的目标是使得第 1 个路由器和第 2 个路由器之间的网络连接经过尽量少的中转路由器。请问在最优方案下中转路由器的最少个数是多少?
+　　你的目标是使得第 1 个路由器和第 2 个路由器之间的网络连接经过尽量少的中转路由器。请问在最优方案下中转路由器的最少个数是多少?&lt;/p&gt;
     
     </summary>
     
@@ -108,7 +108,7 @@
 　　2. sell p s 表示一个出售股票的卖单，每手出价为p，出售股数为s。&lt;br&gt;
 　　3. cancel i表示撤销第i行的记录。&lt;br&gt;
 　　如果开盘价为p0，则系统可以将所有出价至少为p0的买单和所有出价至多为p0的卖单进行匹配。因此，此时的开盘成交量为出价至少为p0的买单的总股数和所有出价至多为p0的卖单的总股数之间的较小值。&lt;br&gt;
-　　你的程序需要确定一个开盘价，使得开盘成交量尽可能地大。如果有多个符合条件的开盘价，你的程序应当输出最高的那一个。
+　　你的程序需要确定一个开盘价，使得开盘成交量尽可能地大。如果有多个符合条件的开盘价，你的程序应当输出最高的那一个。&lt;/p&gt;
     
     </summary>
     
@@ -141,7 +141,7 @@
 &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#问题描述&quot;&gt;♔&lt;/a&gt;问题描述&lt;/h2&gt;
 &lt;p&gt;为了增加公司收入，F公司新开设了物流业务。由于F公司在业界的良好口碑，物流业务一开通即受到了消费者的欢迎，物流业务马上遍及了城市的每条街道。然而，F公司现在只安排了小明一个人负责所有街道的服务。&lt;br&gt;
 　　任务虽然繁重，但是小明有足够的信心，他拿到了城市的地图，准备研究最好的方案。城市中有&lt;em&gt;n&lt;/em&gt;个交叉路口，&lt;em&gt;m&lt;/em&gt;条街道连接在这些交叉路口之间，每条街道的首尾都正好连接着一个交叉路口。除开街道的首尾端点，街道不会在其他位置与其他街道相交。每个交叉路口都至少连接着一条街道，有的交叉路口可能只连接着一条或两条街道。&lt;br&gt;
-　　小明希望设计一个方案，从编号为1的交叉路口出发，每次必须沿街道去往街道另一端的路口，再从新的路口出发去往下一个路口，直到所有的街道都经过了正好一次。
+　　小明希望设计一个方案，从编号为1的交叉路口出发，每次必须沿街道去往街道另一端的路口，再从新的路口出发去往下一个路口，直到所有的街道都经过了正好一次。&lt;/p&gt;
     
     </summary>
     
@@ -176,7 +176,7 @@
     
       &lt;h1&gt;CCF CSP 201409-4 最优配餐&lt;/h1&gt;
 &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#问题描述&quot;&gt;♔&lt;/a&gt;问题描述&lt;/h2&gt;
-&lt;p&gt;栋栋最近开了一家餐饮连锁店，提供外卖服务。随着连锁店越来越多，怎么合理的给客户送餐成为了一个急需解决的问题。
+&lt;p&gt;栋栋最近开了一家餐饮连锁店，提供外卖服务。随着连锁店越来越多，怎么合理的给客户送餐成为了一个急需解决的问题。&lt;/p&gt;
     
     </summary>
     
@@ -211,7 +211,7 @@
 &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#问题描述&quot;&gt;♔&lt;/a&gt;问题描述&lt;/h2&gt;
 &lt;p&gt;某国有&lt;em&gt;n&lt;/em&gt;个城市，为了使得城市间的交通更便利，该国国王打算在城市之间修一些高速公路，由于经费限制，国王打算第一阶段先在部分城市之间修一些单向的高速公路。&lt;br&gt;
 　　现在，大臣们帮国王拟了一个修高速公路的计划。看了计划后，国王发现，有些城市之间可以通过高速公路直接（不经过其他城市）或间接（经过一个或多个其他城市）到达，而有的却不能。如果城市A可以通过高速公路到达城市B，而且城市B也可以通过高速公路到达城市A，则这两个城市被称为便利城市对。&lt;br&gt;
-　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。
+　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。&lt;/p&gt;
     
     </summary>
     
@@ -278,7 +278,7 @@
     
       &lt;h1&gt;正则表达式（上）&lt;/h1&gt;
 &lt;h2 id=&quot;零-什么是正则表达式&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#零-什么是正则表达式&quot;&gt;♔&lt;/a&gt;零 什么是正则表达式&lt;/h2&gt;
-&lt;p&gt;正则表达式（&lt;strong&gt;r&lt;/strong&gt;egular &lt;strong&gt;e&lt;/strong&gt;xpression，简称&lt;strong&gt;RE&lt;/strong&gt;），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。
+&lt;p&gt;正则表达式（&lt;strong&gt;r&lt;/strong&gt;egular &lt;strong&gt;e&lt;/strong&gt;xpression，简称&lt;strong&gt;RE&lt;/strong&gt;），是用来简洁表达一组字符串的表达式。这种针对字符串表达“简洁”和“特征”思想的工具可以非常简单的表达一组字符串的特征，起到了“一行胜千言”的效果。在诸如爬虫等需要对字符串进行处理的地方应用广泛。&lt;/p&gt;
     
     </summary>
     
@@ -311,7 +311,7 @@
     
       &lt;h1&gt;requests库入门（上）&lt;/h1&gt;
 &lt;h2 id=&quot;零-前言&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#零-前言&quot;&gt;♔&lt;/a&gt;零 前言&lt;/h2&gt;
-&lt;p&gt;本系列是pytho爬虫的学习笔记，根据&lt;a href=&quot;https://www.icourse163.org/course/BIT-1001870001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;北京理工大学 Python网络爬虫与信息提取mooc&lt;/a&gt;整理。本文主要阐述了requests库的基本知识以及爬取页面的通用框架。
+&lt;p&gt;本系列是pytho爬虫的学习笔记，根据&lt;a href=&quot;https://www.icourse163.org/course/BIT-1001870001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;北京理工大学 Python网络爬虫与信息提取mooc&lt;/a&gt;整理。本文主要阐述了requests库的基本知识以及爬取页面的通用框架。&lt;/p&gt;
     
     </summary>
     

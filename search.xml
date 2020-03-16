@@ -15,17 +15,17 @@
 <p>4.下载kali镜像</p>
 <h2 id="给kali分配存储空间"><a class="header-anchor" href="#给kali分配存储空间">♔</a>给kali分配存储空间</h2>
 <p>因为我是<strong>双硬盘</strong>，所以先在C盘（按理来说就是电脑的第一块硬盘，部分电脑系统装得比较奇怪，装到了第二块硬盘）分出200M的空白分区用来安装ubuntu的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD两个盘的最后一个是D盘，CDE盘的最后一个是E盘，CDEF盘的最后一个是F盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M,如果空间充足，建议分出80G或100G，空间不足也可以分60G（1G=1024M）</p>
-<p><img src="%5Cpic%5C1628751-20190510155645369-1469851559.png" alt="img"></p>
+<p><img src="/blog/blog/2020/03/16/kali_install/1628751-20190510155645369-1469851559.png" alt="img"></p>
 <h2 id="制作kali启动盘"><a class="header-anchor" href="#制作kali启动盘">♔</a>制作kali启动盘</h2>
 <h3 id="使用软碟通"><a class="header-anchor" href="#使用软碟通">♔</a>使用软碟通</h3>
 <p>选择放有iso文件的文件夹</p>
 <p>双击iso文件</p>
 <p>点击启动，选择写入硬盘映像</p>
-<p><img src="%5Cpic%5Cb.png" alt="img"></p>
+<p><img src="/blog/blog/2020/03/16/kali_install/b.png" alt="img"></p>
 <p>这里要将写入方式改为<strong>raw</strong>，然后点击写入即可(如果写入后出现是否格式化U盘，一定不要点，不然就白做了)</p>
-<p><img src="%5Cpic%5Ca.png" alt="img"></p>
+<p><img src="/blog/blog/2020/03/16/kali_install/a.png" alt="img"></p>
 <h2 id="进入BIOS关闭SecureBoot"><a class="header-anchor" href="#进入BIOS关闭SecureBoot">♔</a>进入BIOS关闭SecureBoot</h2>
-<p><img src="%5Cpic%5Cc.jpg" alt="img"></p>
+<p><img src="/blog/blog/2020/03/16/kali_install/c.jpg" alt="img"></p>
 <p>然后重启电脑选择U盘启动。</p>
 <h2 id="安装kali"><a class="header-anchor" href="#安装kali">♔</a>安装kali</h2>
 <p>选择start installer,语言选中文，然后配置网卡（为了方便可以不先配置），然后设置主机名，域名(默认，空着就行了)，root密码等等。</p>
@@ -37,7 +37,7 @@
 <li>/:这是ubuntu 的根目录,用于安装系统和软件，相当于windows的C盘，我们将其分为 20G，主分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/&quot;（根据你的磁盘空间调整，可以大一点，毕竟ubuntu装软件都是默认装在根目录的）</li>
 </ol>
 <p>4）/home:相当于windows的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于&quot;ext4日志文件系统&quot;，挂载点为&quot;/home&quot;</p>
-<p><img src="%5Cpic%5Cd.png" alt="img"></p>
+<p><img src="/blog/blog/2020/03/16/kali_install/d.png" alt="img"></p>
 <p>至此分区结束，然后等待安装完成后自动重启，选择kali启动就可以进入系统了。</p>
 <h2 id="参考文献"><a class="header-anchor" href="#参考文献">♔</a>参考文献</h2>
 <p><a href="https://www.jianshu.com/p/6d90d8084128" target="_blank" rel="noopener">Windows-Kali双系统安装教程</a></p>
