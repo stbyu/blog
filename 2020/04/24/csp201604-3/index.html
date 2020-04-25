@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Stbyu&#39;s blog">
 <meta property="og:description" content="CCF CSP 201604-3 路径解析">
 <meta property="article:published_time" content="2020-04-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-24T03:46:43.557Z">
+<meta property="article:modified_time" content="2020-04-25T07:18:02.352Z">
 <meta property="article:author" content="Stbyu">
 <meta property="article:tag" content="csp">
 <meta property="article:tag" content="笔记">
@@ -452,7 +452,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  261
+                  470
                 </span>
               
 
@@ -468,7 +468,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -499,7 +499,7 @@
 
 
 <h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
-<p>​</p>
+<p>这一题不是很麻烦，接助string类型支持的各种方法可以比较容易的完成这个题目。首先我们要读入表示当前位置的字符串，然后去除掉重复的’/‘、多余的’/./‘以及末尾的’/‘。然后进行读入，若读入的字符串以’/‘开头，则读入的是绝对路径，直接进行处理，若不以’/‘开头，则是相对路径，则应在前面拼接上当前位置和’/‘再进行处理。处理过程为先去除掉重复的’/‘和多余的’/./‘，然后从头开始遍历，找到两个’/‘之间的位置若为’…‘则栈顶向下移一个，表示跳回到上一层，若不为’…‘，则压入栈中。处理完毕后从栈底到栈顶（使用数组模拟栈)依次输出即可。</p>
 <h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,top;</span><br><span class="line"><span class="built_in">string</span> s,t,st[<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;s;</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;s.size(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(s[i]==<span class="string">'/'</span> &amp;&amp; s[i+<span class="number">1</span>]==<span class="string">'/'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			s.erase(i,<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(s.find(<span class="string">"/./"</span>)!=s.npos)</span><br><span class="line">	&#123;</span><br><span class="line">		s.erase(s.find(<span class="string">"/./"</span>)+<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(s[s.size()<span class="number">-1</span>]==<span class="string">'/'</span>) s.erase(s.size()<span class="number">-1</span>,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		getline(<span class="built_in">cin</span>,t);</span><br><span class="line">		<span class="keyword">if</span>(t[<span class="number">0</span>]!=<span class="string">'/'</span>) t=s+<span class="string">"/"</span>+t;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;t.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(t[i]==<span class="string">'/'</span> &amp;&amp; t[i+<span class="number">1</span>]==<span class="string">'/'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				t.erase(i,<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(t.find(<span class="string">"/./"</span>)!=t.npos)</span><br><span class="line">		&#123;</span><br><span class="line">			t.erase(t.find(<span class="string">"/./"</span>)+<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(t[t.size()<span class="number">-1</span>]!=<span class="string">'/'</span>) t[t.size()]=<span class="string">'/'</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;t.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			k=i;</span><br><span class="line">			<span class="keyword">while</span>(t[i]!=<span class="string">'/'</span>) i++;</span><br><span class="line">			<span class="keyword">if</span>(t.substr(k,i-k)==<span class="string">".."</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				top--;</span><br><span class="line">				<span class="keyword">if</span>(top&lt;<span class="number">0</span>) top=<span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				st[++top]=t.substr(k,i-k);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=top;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"/"</span>&lt;&lt;st[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(i==<span class="number">1</span>) <span class="built_in">cout</span>&lt;&lt;<span class="string">"/"</span>;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -665,7 +665,7 @@
               
                 <a href="/blog/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -732,6 +732,10 @@
         	
         	
           	<li>
+            	<a href="/blog/2020/04/25/week10hwmn/" title="【作业向】程序设计思维与实践 Week10 限时大模拟" target="_blank">【作业向】程序设计思维与实践 Week10 限时大模拟</a>
+          	</li>
+        	
+          	<li>
             	<a href="/blog/2020/04/25/week10hw/" title="【作业向】程序设计思维与实践 Week10 作业" target="_blank">【作业向】程序设计思维与实践 Week10 作业</a>
           	</li>
         	
@@ -745,10 +749,6 @@
         	
           	<li>
             	<a href="/blog/2020/04/18/week8hw/" title="【作业向】程序设计思维与实践 Week8 作业" target="_blank">【作业向】程序设计思维与实践 Week8 作业</a>
-          	</li>
-        	
-          	<li>
-            	<a href="/blog/2020/04/17/csp-m2/" title="【作业向】程序设计思维与实践 CSP-M2" target="_blank">【作业向】程序设计思维与实践 CSP-M2</a>
           	</li>
         	
       		</ul>
@@ -811,7 +811,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.1k</span>
+    <span title="Site words total count">33.2k</span>
   
 </div>
 
