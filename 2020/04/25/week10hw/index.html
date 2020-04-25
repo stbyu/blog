@@ -96,7 +96,7 @@
 
 
 
-  <meta name="keywords" content="csp,作业,程序设计思维," />
+  <meta name="keywords" content="作业,程序设计思维,csp," />
 
 
 
@@ -116,11 +116,11 @@
 <meta property="og:site_name" content="Stbyu&#39;s blog">
 <meta property="og:description" content="【作业向】程序设计思维与实践 Week10作业">
 <meta property="article:published_time" content="2020-04-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-24T03:33:45.403Z">
+<meta property="article:modified_time" content="2020-04-25T04:08:16.929Z">
 <meta property="article:author" content="Stbyu">
-<meta property="article:tag" content="csp">
 <meta property="article:tag" content="作业">
 <meta property="article:tag" content="程序设计思维">
+<meta property="article:tag" content="csp">
 <meta name="twitter:card" content="summary">
 
 
@@ -452,7 +452,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  983
+                  1.2k
                 </span>
               
 
@@ -468,7 +468,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -504,6 +504,7 @@
 <h4 id="Output-v2"><a class="header-anchor" href="#Output-v2">♔</a>Output</h4>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7</span><br></pre></td></tr></table></figure>
 <h3 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h3>
+<p>这一题需要判断m/n是否可以由2<sup>k</sup>*3<sup>j</sup>组成，若可以则输出k+j的值，否则输出-1。</p>
 <h3 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll m,n,sum;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">if</span>(n&gt;m || m%n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"-1"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m==n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"0"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m=m/n;</span><br><span class="line">	<span class="keyword">while</span>(m &amp;&amp; m%<span class="number">3</span>==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		sum++;</span><br><span class="line">		m/=<span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(m &amp;&amp; m%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		sum++;</span><br><span class="line">		m/=<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m!=<span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"-1"</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%lld"</span>,sum);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="B-LIS-LCS"><a class="header-anchor" href="#B-LIS-LCS">♔</a>B LIS &amp; LCS</h2>
@@ -518,6 +519,10 @@
 <h3 id="Output-v3"><a class="header-anchor" href="#Output-v3">♔</a>Output</h3>
 <p>输出一行数据ans1和ans2，分别代表序列A的LIS和序列AB的LCS的长度</p>
 <h3 id="解题思路-v2"><a class="header-anchor" href="#解题思路-v2">♔</a>解题思路</h3>
+<p>这一题是比较经典的动态规划的题目，对于最长上升子序列，递推式为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp1[i]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&lt;a[i]) dp1[i]=<span class="built_in">max</span>(dp1[i],dp1[j]+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,dp1[i]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>对于最长公共子序列，递推式为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i]==b[j]) dp2[i][j]=<span class="built_in">max</span>(dp2[i][j],dp2[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				dp2[i][j]=<span class="built_in">max</span>(dp2[i<span class="number">-1</span>][j],dp2[i][j<span class="number">-1</span>]);</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="代码-v2"><a class="header-anchor" href="#代码-v2">♔</a>代码</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp1[<span class="number">5005</span>],dp2[<span class="number">5005</span>][<span class="number">5005</span>],ans;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">5005</span>],b[<span class="number">5005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp1[i]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&lt;a[i]) dp1[i]=<span class="built_in">max</span>(dp1[i],dp1[j]+<span class="number">1</span>);</span><br><span class="line">			<span class="comment">//else dp1[i]=max(dp1[i],dp1[j]);</span></span><br><span class="line">		&#125;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,dp1[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>,ans);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;b[i]);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i]==b[j]) dp2[i][j]=<span class="built_in">max</span>(dp2[i][j],dp2[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				dp2[i][j]=<span class="built_in">max</span>(dp2[i<span class="number">-1</span>][j],dp2[i][j<span class="number">-1</span>]);</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,dp2[n][m]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="C-拿数问题-II"><a class="header-anchor" href="#C-拿数问题-II">♔</a>C 拿数问题 II</h2>
@@ -536,6 +541,9 @@
 <h4 id="Output-v5"><a class="header-anchor" href="#Output-v5">♔</a>Output</h4>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
 <h3 id="解题思路-v3"><a class="header-anchor" href="#解题思路-v3">♔</a>解题思路</h3>
+<p>这一题要先对数据进行一个处理，要记录下出现的每个数的个数存储在a[i]中。然后进行递推，式子为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">1</span>]=a[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=maxn;i++)</span><br><span class="line">		dp[i]=<span class="built_in">max</span>(dp[i<span class="number">-1</span>],dp[i<span class="number">-2</span>]+i*a[i]);</span><br></pre></td></tr></table></figure>
+<p>即第i个数取或者不取的两种状态。答案为dp[maxn]，maxn表示出现的最大的数。</p>
 <h3 id="代码-v3"><a class="header-anchor" href="#代码-v3">♔</a>代码</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll n,maxn;</span><br><span class="line">ll a[<span class="number">100005</span>],dp[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;j);</span><br><span class="line">		a[j]++;</span><br><span class="line">		maxn=<span class="built_in">max</span>(maxn,j);</span><br><span class="line">	&#125;</span><br><span class="line">	dp[<span class="number">1</span>]=a[<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=maxn;i++)</span><br><span class="line">		dp[i]=<span class="built_in">max</span>(dp[i<span class="number">-1</span>],dp[i<span class="number">-2</span>]+i*a[i]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld"</span>,dp[maxn]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -584,11 +592,11 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/csp/" rel="tag"># csp</a>
-          
             <a href="/blog/tags/%E4%BD%9C%E4%B8%9A/" rel="tag"># 作业</a>
           
             <a href="/blog/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/" rel="tag"># 程序设计思维</a>
+          
+            <a href="/blog/tags/csp/" rel="tag"># csp</a>
           
         </div>
       
@@ -843,7 +851,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.3k</span>
+    <span title="Site words total count">31.1k</span>
   
 </div>
 
@@ -1343,6 +1351,77 @@
   
 
   
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
 
 
    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
