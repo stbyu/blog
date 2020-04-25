@@ -1088,7 +1088,7 @@ pre .javascript .function {
   display: block;
 }
 .header {
-  background: transparent;
+  background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587813234678&di=4119b9a644ee1f5e975a2e86347414e2&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171223%2F0a7162837ccc496d9505e791e7fc41f2.jpeg");
 }
 .header-inner {
   position: relative;
@@ -1933,7 +1933,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff3867;
+  background: #6e6f1a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3126,4 +3126,11 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+.post {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(120,216,216,0.5);
+  -moz-box-shadow: 0 0 5px rgba(238,248,247,0.5);
 }
