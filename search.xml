@@ -146,9 +146,9 @@ Trapped!</p>
 <p>条件一：<br>
 空串为合法序列，那么初始化 dp 数组为 0 即可<br>
 条件二：遇到合法序列的左右括号匹配则长度加 2<br>
-dp[i][j]=max(dp[i] [j],dp[i+1] [j−1]+2)dp[i][j]=max(dp[i] [j],dp[i+1] [j-1]+2)dp[i] [j]=max(dp[i] [j],dp[i+1] [j−1]+2)<br>
+dp[i] [j]=max(dp[i] [j],dp[i+1] [j−1]+2)<br>
 条件三：A、B为合法序列，则AB为合法序列<br>
-dp[i] [j]=max(dp[i] [j],dp[i] [k]+dp[k+1] [j])dp[i] [j]=max(dp[i] [j],dp[i] [k]+dp[k+1] [j])dp[i] [j]=max(dp[i] [j],dp[i] [k]+dp[k+1] [j])</p>
+dp[i] [j]=max(dp[i] [j],dp[i] [k]+dp[k+1] [j])</p>
 <p>最后的答案为dp[0] [n-1]</p>
 <h3 id="代码-v4"><a class="header-anchor" href="#代码-v4">♔</a>代码</h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">char</span> c[<span class="number">105</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">105</span>][<span class="number">105</span>],n; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,k,h;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">" %s"</span>,c)!=EOF)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(c[<span class="number">0</span>]==<span class="string">'e'</span>) <span class="keyword">break</span>;</span><br><span class="line">		n=<span class="built_in">strlen</span>(c);</span><br><span class="line">		<span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">		<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;n;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i+k&lt;n;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				j=i+k;</span><br><span class="line">				<span class="keyword">if</span>((c[i]==<span class="string">'('</span> &amp;&amp; c[j]==<span class="string">')'</span>) || (c[i]==<span class="string">'['</span> &amp;&amp; c[j]==<span class="string">']'</span>))</span><br><span class="line">				&#123;</span><br><span class="line">					dp[i][j]=dp[i+<span class="number">1</span>][j<span class="number">-1</span>]+<span class="number">2</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">for</span>(h=i;h&lt;j;h++)</span><br><span class="line">					dp[i][j]=<span class="built_in">max</span>(dp[i][j],dp[i][h]+dp[h+<span class="number">1</span>][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dp[<span class="number">0</span>][n<span class="number">-1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1135,8 +1135,8 @@ M≤20</p>
       <tags>
         <tag>csp</tag>
         <tag>笔记</tag>
-        <tag>bfs</tag>
         <tag>模拟</tag>
+        <tag>bfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1508,6 +1508,55 @@ buy 100.00 50</p>
       </tags>
   </entry>
   <entry>
+    <title>CCF CSP 201509-4 高速公路</title>
+    <url>/blog/2020/02/11/csp201509-4/</url>
+    <content><![CDATA[<h1>CCF CSP 201509-4 高速公路</h1>
+<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
+<p>某国有<em>n</em>个城市，为了使得城市间的交通更便利，该国国王打算在城市之间修一些高速公路，由于经费限制，国王打算第一阶段先在部分城市之间修一些单向的高速公路。<br>
+　　现在，大臣们帮国王拟了一个修高速公路的计划。看了计划后，国王发现，有些城市之间可以通过高速公路直接（不经过其他城市）或间接（经过一个或多个其他城市）到达，而有的却不能。如果城市A可以通过高速公路到达城市B，而且城市B也可以通过高速公路到达城市A，则这两个城市被称为便利城市对。<br>
+　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。<a id="more"></a></p>
+<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
+<p>输入的第一行包含两个整数<em>n</em>, <em>m</em>，分别表示城市和单向高速公路的数量。<br>
+　　接下来<em>m</em>行，每行两个整数<em>a</em>, <em>b</em>，表示城市<em>a</em>有一条单向的高速公路连向城市<em>b</em>。</p>
+<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
+<p>输出一行，包含一个整数，表示便利城市对的数量。</p>
+<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
+<p>5 5<br>
+1 2<br>
+2 3<br>
+3 4<br>
+4 2<br>
+3 5</p>
+<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
+<p>3</p>
+<h2 id="样例说明"><a class="header-anchor" href="#样例说明">♔</a>样例说明</h2>
+<p><img src="http://118.190.20.162/RequireFile.do?fid=4HG9GgbF" alt="img"></p>
+<p>​		城市间的连接如图所示。有3个便利城市对，它们分别是(2, 3), (2, 4), (3, 4)，请注意(2, 3)和(3, 2)看成同一个便利城市对。</p>
+<h2 id="评测用例规模与约定"><a class="header-anchor" href="#评测用例规模与约定">♔</a>评测用例规模与约定</h2>
+<p>前30%的评测用例满足1 ≤ <em>n</em> ≤ 100, 1 ≤ <em>m</em> ≤ 1000；<br>
+　　前60%的评测用例满足1 ≤ <em>n</em> ≤ 1000, 1 ≤ <em>m</em> ≤ 10000；<br>
+　　所有评测用例满足1 ≤ <em>n</em> ≤ 10000, 1 ≤ <em>m</em> ≤ 100000。</p>
+<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
+<p>​		根据题意可知，我们只要分别求出图中各个连通分量所包含的节点数目，即可分别计算出便利城市对数，然后将各个连通分量的便利城市对数相加就可以了。题目不难，只要套个Tarjan板子就可以做，但迷惑的是我的板子好像是错的？？？我的模板是这么写的，只能得80分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(dfn[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
+<p>​		后来找的板子是这样的，可以a掉</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dfn[<span class="number">100005</span>],low[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> m,n,times;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[<span class="number">100005</span>],visit[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> top,cnt,sum[<span class="number">100005</span>],icnt,isum[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">100005</span>],nxt[<span class="number">200005</span>],to[<span class="number">200005</span>],ecnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">adde</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	nxt[++ecnt]=adj[x],adj[x]=ecnt,to[ecnt]=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	visit[u]=<span class="number">1</span>,<span class="built_in">stack</span>[++top]=u;</span><br><span class="line">	dfn[u]=low[u]=++times;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=adj[u];i;i=nxt[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v=to[i];</span><br><span class="line">		<span class="keyword">if</span>(!dfn[v])</span><br><span class="line">		&#123;</span><br><span class="line">			Tarjan(v);</span><br><span class="line">			low[u]=min(low[u],low[v]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[u]==low[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		icnt++; </span><br><span class="line">		visit[u]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(v=<span class="built_in">stack</span>[top--],isum[icnt]++,v!=u) visit[v]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">		adde(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) </span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) Tarjan(i);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=icnt;i++) </span><br><span class="line">		ans+=isum[i]*(isum[i]<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>csp</category>
+      </categories>
+      <tags>
+        <tag>csp</tag>
+        <tag>笔记</tag>
+        <tag>图论</tag>
+        <tag>Tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CCF CSP 201409-4 最优配餐</title>
     <url>/blog/2020/02/11/csp201409-4/</url>
     <content><![CDATA[<h1>CCF CSP 201409-4 最优配餐</h1>
@@ -1557,55 +1606,6 @@ buy 100.00 50</p>
         <tag>笔记</tag>
         <tag>图论</tag>
         <tag>bfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CCF CSP 201509-4 高速公路</title>
-    <url>/blog/2020/02/11/csp201509-4/</url>
-    <content><![CDATA[<h1>CCF CSP 201509-4 高速公路</h1>
-<h2 id="问题描述"><a class="header-anchor" href="#问题描述">♔</a>问题描述</h2>
-<p>某国有<em>n</em>个城市，为了使得城市间的交通更便利，该国国王打算在城市之间修一些高速公路，由于经费限制，国王打算第一阶段先在部分城市之间修一些单向的高速公路。<br>
-　　现在，大臣们帮国王拟了一个修高速公路的计划。看了计划后，国王发现，有些城市之间可以通过高速公路直接（不经过其他城市）或间接（经过一个或多个其他城市）到达，而有的却不能。如果城市A可以通过高速公路到达城市B，而且城市B也可以通过高速公路到达城市A，则这两个城市被称为便利城市对。<br>
-　　国王想知道，在大臣们给他的计划中，有多少个便利城市对。<a id="more"></a></p>
-<h2 id="输入格式"><a class="header-anchor" href="#输入格式">♔</a>输入格式</h2>
-<p>输入的第一行包含两个整数<em>n</em>, <em>m</em>，分别表示城市和单向高速公路的数量。<br>
-　　接下来<em>m</em>行，每行两个整数<em>a</em>, <em>b</em>，表示城市<em>a</em>有一条单向的高速公路连向城市<em>b</em>。</p>
-<h2 id="输出格式"><a class="header-anchor" href="#输出格式">♔</a>输出格式</h2>
-<p>输出一行，包含一个整数，表示便利城市对的数量。</p>
-<h2 id="样例输入"><a class="header-anchor" href="#样例输入">♔</a>样例输入</h2>
-<p>5 5<br>
-1 2<br>
-2 3<br>
-3 4<br>
-4 2<br>
-3 5</p>
-<h2 id="样例输出"><a class="header-anchor" href="#样例输出">♔</a>样例输出</h2>
-<p>3</p>
-<h2 id="样例说明"><a class="header-anchor" href="#样例说明">♔</a>样例说明</h2>
-<p><img src="http://118.190.20.162/RequireFile.do?fid=4HG9GgbF" alt="img"></p>
-<p>​		城市间的连接如图所示。有3个便利城市对，它们分别是(2, 3), (2, 4), (3, 4)，请注意(2, 3)和(3, 2)看成同一个便利城市对。</p>
-<h2 id="评测用例规模与约定"><a class="header-anchor" href="#评测用例规模与约定">♔</a>评测用例规模与约定</h2>
-<p>前30%的评测用例满足1 ≤ <em>n</em> ≤ 100, 1 ≤ <em>m</em> ≤ 1000；<br>
-　　前60%的评测用例满足1 ≤ <em>n</em> ≤ 1000, 1 ≤ <em>m</em> ≤ 10000；<br>
-　　所有评测用例满足1 ≤ <em>n</em> ≤ 10000, 1 ≤ <em>m</em> ≤ 100000。</p>
-<h2 id="解题思路"><a class="header-anchor" href="#解题思路">♔</a>解题思路</h2>
-<p>​		根据题意可知，我们只要分别求出图中各个连通分量所包含的节点数目，即可分别计算出便利城市对数，然后将各个连通分量的便利城市对数相加就可以了。题目不难，只要套个Tarjan板子就可以做，但迷惑的是我的板子好像是错的？？？我的模板是这么写的，只能得80分</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(dfn[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
-<p>​		后来找的板子是这样的，可以a掉</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<h2 id="代码"><a class="header-anchor" href="#代码">♔</a>代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dfn[<span class="number">100005</span>],low[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> m,n,times;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[<span class="number">100005</span>],visit[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> top,cnt,sum[<span class="number">100005</span>],icnt,isum[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> adj[<span class="number">100005</span>],nxt[<span class="number">200005</span>],to[<span class="number">200005</span>],ecnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">adde</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	nxt[++ecnt]=adj[x],adj[x]=ecnt,to[ecnt]=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	visit[u]=<span class="number">1</span>,<span class="built_in">stack</span>[++top]=u;</span><br><span class="line">	dfn[u]=low[u]=++times;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=adj[u];i;i=nxt[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v=to[i];</span><br><span class="line">		<span class="keyword">if</span>(!dfn[v])</span><br><span class="line">		&#123;</span><br><span class="line">			Tarjan(v);</span><br><span class="line">			low[u]=min(low[u],low[v]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(visit[v] &amp;&amp; dfn[v]&lt;low[u]) low[u]=dfn[v];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[u]==low[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		icnt++; </span><br><span class="line">		visit[u]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(v=<span class="built_in">stack</span>[top--],isum[icnt]++,v!=u) visit[v]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">		adde(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) </span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) Tarjan(i);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=icnt;i++) </span><br><span class="line">		ans+=isum[i]*(isum[i]<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>csp</category>
-      </categories>
-      <tags>
-        <tag>csp</tag>
-        <tag>笔记</tag>
-        <tag>图论</tag>
-        <tag>Tarjan</tag>
       </tags>
   </entry>
   <entry>
