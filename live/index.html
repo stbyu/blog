@@ -109,12 +109,14 @@
 
 
 
+<meta name="description" content="flv.js demo               .mainContainer {             display: block;             width: 100%;             height: 40%;             margin-left: auto;             margin-right: auto;">
 <meta property="og:type" content="website">
-<meta property="og:title" content="老友记 — 驯化">
+<meta property="og:title" content="Stbyu&#39;s blog">
 <meta property="og:url" content="http://stbyu.github.io/blog/live/index.html">
 <meta property="og:site_name" content="Stbyu&#39;s blog">
-<meta property="article:published_time" content="2020-04-25T01:54:12.693Z">
-<meta property="article:modified_time" content="2020-04-25T01:54:12.693Z">
+<meta property="og:description" content="flv.js demo               .mainContainer {             display: block;             width: 100%;             height: 40%;             margin-left: auto;             margin-right: auto;">
+<meta property="article:published_time" content="2020-03-26T11:08:08.015Z">
+<meta property="article:modified_time" content="2020-03-26T11:08:08.015Z">
 <meta property="article:author" content="Stbyu">
 <meta name="twitter:card" content="summary">
 
@@ -152,7 +154,7 @@
 
 
 
-  <title>老友记 — 驯化 | Stbyu's blog</title>
+  <title> | Stbyu's blog</title>
   
 
 
@@ -162,7 +164,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -346,7 +348,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">老友记 — 驯化</h1>
+	<h1 class="post-title" itemprop="name headline"></h1>
 
 
 
@@ -358,7 +360,117 @@
       <div class="post-body">
         
         
-          
+          <!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>flv.js demo</title>
+
+    <style>
+        .mainContainer {
+            display: block;
+            width: 100%;
+            height: 40%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .urlInput {
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .centeredVideo {
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+        }
+
+        .controls {
+            display: block;
+            width: 100%;
+            height: 40%;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .logcatBox {
+            border-color: #CCCCCC;
+            font-size: 11px;
+            font-family: Menlo, Consolas, monospace;
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/blog/atom.xml" title="Stbyu's blog" type="application/atom+xml">
+</head>
+
+<body>
+    
+    <div class="mainContainer">
+        <video name="videoElement" class="centeredVideo" id="videoElement" controls width="1024" height="576" autoplay>
+            Your browser is too old which doesn't support HTML5 video.
+        </video>
+
+    </div>
+
+    <script src="https://cdn.bootcss.com/flv.js/1.3.2/flv.min.js"></script>
+    
+    <script>
+         if (flvjs.isSupported()) {
+            startVideo()
+        }
+
+        function startVideo(){
+            var videoElement = document.getElementById('videoElement');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                isLive: true,
+                hasAudio: true,
+                hasVideo: true,
+                enableStashBuffer: true,
+                url: 'https://vdn-flv.xuetangx.com/xuetangaudio/ChangjiangLive-3980329-6fcfd2e7.flv'
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+        }
+
+        videoElement.addEventListener('click', function(){
+            alert( '是否支持点播视频：' + flvjs.getFeatureList().mseFlvPlayback + ' 是否支持httpflv直播流：' + flvjs.getFeatureList().mseLiveFlvPlayback )
+        })
+
+        function destoryVideo(){
+            flvPlayer.pause();
+            flvPlayer.unload();
+            flvPlayer.detachMediaElement();
+            flvPlayer.destroy();
+            flvPlayer = null;
+        }
+
+        function reloadVideo(){
+            destoryVideo()
+            startVideo()
+        }
+    </script>
+    
+</body>
+
+</html>
+
         
       </div>
       
@@ -427,7 +539,7 @@
               
                 <a href="/blog/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -494,7 +606,15 @@
         	
         	
           	<li>
-            	<a href="/blog/2020/04/25/week10hw/" title="【作业向】程序设计思维与实践 Week10 作业" target="_blank">【作业向】程序设计思维与实践 Week10 作业</a>
+            	<a href="/blog/2020/05/15/csp-m3/" title="【作业向】程序设计思维与实践 CSP-M3" target="_blank">【作业向】程序设计思维与实践 CSP-M3</a>
+          	</li>
+        	
+          	<li>
+            	<a href="/blog/2020/05/14/week12hw/" title="【作业向】程序设计思维与实践 Week12 作业" target="_blank">【作业向】程序设计思维与实践 Week12 作业</a>
+          	</li>
+        	
+          	<li>
+            	<a href="/blog/2020/05/13/week11hw/" title="【作业向】程序设计思维与实践 Week11 作业" target="_blank">【作业向】程序设计思维与实践 Week11 作业</a>
           	</li>
         	
           	<li>
@@ -502,15 +622,7 @@
           	</li>
         	
           	<li>
-            	<a href="/blog/2020/04/24/csp201604-3/" title="CCF CSP 201604-3 路径解析" target="_blank">CCF CSP 201604-3 路径解析</a>
-          	</li>
-        	
-          	<li>
-            	<a href="/blog/2020/04/23/week9hw/" title="【作业向】程序设计思维与实践 Week9 作业" target="_blank">【作业向】程序设计思维与实践 Week9 作业</a>
-          	</li>
-        	
-          	<li>
-            	<a href="/blog/2020/04/18/week8hw/" title="【作业向】程序设计思维与实践 Week8 作业" target="_blank">【作业向】程序设计思维与实践 Week8 作业</a>
+            	<a href="/blog/2020/04/25/week10hw/" title="【作业向】程序设计思维与实践 Week10 作业" target="_blank">【作业向】程序设计思维与实践 Week10 作业</a>
           	</li>
         	
       		</ul>
@@ -557,7 +669,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">33.2k</span>
+    <span title="Site words total count">40k</span>
   
 </div>
 
